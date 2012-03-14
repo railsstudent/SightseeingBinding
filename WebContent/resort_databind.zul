@@ -1,0 +1,34 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+<?script content="zk.googleAPIkey='ABQIAAAAmGxmYR57XDAbAumS9tV5fxQXyylOlR69a1vFTcUcpV6DXdesOBSMEHfkewcSzwEwBT7UzVx8ep8vjA'"?>
+
+<?page title="ZK Tutorial (With Data Binding)" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="win" title="ZK Tutorial" border="normal"
+  apply="org.zkforge.resort.ui.ResortController2" width="1140px">
+  <hbox>
+      <zscript><![CDATA[
+	        org.zkforge.resort.ui.ResortController2 strset = new org.zkforge.resort.ui.ResortController2();
+       ]]></zscript>
+  		<listbox id="lb" model="@{win$ResortController2.resorts}" selectedItem="@{win$ResortController2.selected}">
+  			<listhead sizable="true">
+  				<listheader label="Name" width="200px" />
+  				<listheader label="Description" width="285px" />
+  			</listhead>
+  			 <listitem self="@{each=resort}">
+     	        <listcell label="@{resort.name}" />
+        	    <listcell label="@{resort.description}" />            
+            </listitem>
+  		</listbox>
+  		<gmaps id="gmap" zoom="16" showTypeCtrl="true" mapType="satellite" showLargeCtrl="true" width="610px" height="400px">
+			<ginfo id="ginfo" />
+  		</gmaps>
+  </hbox>
+  <groupbox id="gb" mold="3d" width="100%">
+  		<caption label="Resort" />
+  		Name: <textbox readonly="true" id="name" value="@{win$ResortController2.selected.name}" />
+  		Description: <textbox readonly="true" id="desc" value="@{win$ResortController2.selected.description}" />
+  		Longitude: <doublebox readonly="true" id="longitude" value="@{win$ResortController2.selected.longitude}" />
+  		Latitude: <doublebox readonly="true" id="latitude" value="@{win$ResortController2.selected.latitude}" />  		
+  </groupbox>
+</window>
+</zk>
